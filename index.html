@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordersystem för restaurang</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div class="container text-center">
+        <div class="alert alert-success fixed-top" style="display:none" role="alert">
+            
+        </div>
+        <div class="alert alert-danger fixed-top" style="display:none" role="alert">
+            
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Beställning</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="modal-orders list-group">
+
+                    </ul>
+                    <h6 class="mt-5">Notering för beställning</h6>
+                    <input id="note" type="text">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Stäng</button>
+                  <button id="makeOrder" type="button" class="btn btn-primary">Beställ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="kvittoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="kvittoModalLabel">Kvitto</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="kvittoModal-body">
+                    <ul class="kvittoModal-orders list-group">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Stäng</button>
+                  <button id="pay" type="button" class="btn btn-primary">Betalt</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    <div id="yo" class="col-md-12 text-center"> 
+    <h1 class="mt-5">Ordersystem</h1>
+    
+    <button id="order" type="button" class="btn btn-primary mt-5 btn-lg ">Ny beställning</button>
+    <div class="dropdown mt-5">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bord</button>
+        <div id="bord" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        </div>
+      </div>
+      <div class="row mt-5">
+        <button id="pizza" type="button" class="btn btn-primary col m-2 menu">Pizza</button>
+        <button id="dryck" type="button" class="btn btn-primary col m-2 menu">Dryck</button>
+        <button id="misc" type="button" class="btn btn-primary col m-2 menu">Tillbehör</button>
+    </div>
+    </div>
+    <div id="pizza-menu">
+        <span class="badge badge-warning mt-3 col">Ingredienser med risk för allergi markeras med <strong>fetstil.</strong></span>
+        <ul class="list-group mt-5">
+            <h4>Pizza klass 1</h4>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="65">Margherita</h5>
+                <p class="small mt-1">Tomatsås, Ost</p>
+                <h6><span class="badge badge-pill badge-info">65kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="65">Vesuvio</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka</p>
+                <h6><span class="badge badge-pill badge-info">65kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="65">Altono</h5>
+                <p class="small mt-1">Tomatsås, Ost, Tonfisk</p>
+                <h6><span class="badge badge-pill badge-info">65kr</span></h6>
+            </button>
+          </ul>
+
+          <ul class="list-group mt-5">
+            <h4>Pizza klass 2</h4>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="80">Calzone</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka</p>
+                <h6><span class="badge badge-pill badge-info">80kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Capricciosa</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Champinjoner</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Tomaso</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, <strong>Räkor</strong></p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Hawaii</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Ananas</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Oriental</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Köttfärs</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Venezia</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Tonfisk</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Bolognese</h5>
+                <p class="small mt-1">Tomatsås, Ost, Köttfärs, Lök</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="70">Napoli</h5>
+                <p class="small mt-1">Tomatsås, Ost, <strong>Räkor</strong>, Champinjoner</p>
+                <h6><span class="badge badge-pill badge-info">70kr</span></h6>
+            </button>
+          </ul>
+
+          <ul class="list-group mt-5 mb-5">
+            <h4>Pizza klass 3</h4>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Bravo</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Bacon, Lök, <strong>Ägg</strong></p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Princessa</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, <strong>Räkor</strong>, Champinjoner</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Kroppkärr</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Köttfärs, Champinjoner</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Afrikano</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Ananas, Curry, Banan</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="85">Önska</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, <strong>Räkor</strong>, Champinjoner</p>
+                <h6><span class="badge badge-pill badge-info">85kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Lambada</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Köttfärs, <strong>Räkor</strong></p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Alsterdalen</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, <strong>Crabfish</strong>, <strong>Räkor</strong></p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Paradis</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, <strong>Räkor</strong>, Ananas</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Roma</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Kantareller, Tomater(färska)</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Banjogatan</h5>
+                <p class="small mt-1">Tomatsås, Ost, Skinka, Salami, Paprika</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Rimini</h5>
+                <p class="small mt-1">Tomatsås, Ost, Köttfärs, Gorgonzolaost, lök</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Opera</h5>
+                <p class="small mt-1">Tomatsås, Ost, Köttfärs, Ananas, Curry, Banan</p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+            <button type="button" class="list-group-item list-group-item-action">
+                <h5 data-price="75">Mesopotamia</h5>
+                <p class="small mt-1">Tomatsås, Ost, Salami, köttfärs, <strong>Nötter</strong></p>
+                <h6><span class="badge badge-pill badge-info">75kr</span></h6>
+            </button>
+          </ul>
+        </div>
+        <div id="drink-menu">
+            <ul class="list-group mt-5 mb-5">
+                <h4>Drycker</h4>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Coca-Cola 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Coca-Cola light 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Fanta 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Sprite 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Mineralvatten 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="15">Lättöl 33 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">15kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="20">Coca-Cola 50 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">20kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="20">Fanta 50 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">20kr</span></h6>
+                </button>
+              </ul>
+        </div>
+        <div id="misc-menu">
+            <ul class="list-group mt-5 mb-5">
+                <h4>Tillbehör</h4>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Bearnaisesås 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Kebabsås mild 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Kebabsås stark 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Kebabsås blandad 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Tzatzikisås 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">
+                    <h5 data-price="10">Vitlökssås 10 cl</h5>
+                    <h6><span class="badge badge-pill badge-info">10kr</span></h6>
+                </button>
+            </ul>
+        </div>
+
+        <nav class="navbar  navbar-light bg-light fixed-bottom">
+            <button id="order-cart" class="btn btn-primary">Order <span class="badge badge-light"></span></button>
+            <button id="back" class="btn btn-primary">Till toppen</button>
+            <button id="kvitto" class="btn btn-primary">Kvitto <span class="badge badge-light"></span></button>
+        </nav>
+</div>
+
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="jquery.js"></script>
+</body>
+</html>
